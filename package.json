@@ -3,6 +3,20 @@
     "git:commit": "git add . && git commit -m \"$npm_package_name ($npm_package_version) ($(date))\"",
     "git:push": "git push origin master",
     "git": "npm run git:commit && npm run git:push",
-    "dev": "skaffold dev"
+    "dev": "skaffold dev",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.3.0",
+    "@typescript-eslint/parser": "^6.3.0",
+    "eslint": "^8.46.0",
+    "eslint-config-prettier": "^9.0.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.3",
+    "prettier": "^3.0.1"
+  },
+  "lint-staged": {
+    "*.{js,ts}": "eslint --cache --fix",
+    "*.{js,ts,md}": "prettier --write"
   }
 }
