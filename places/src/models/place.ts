@@ -16,6 +16,10 @@ export class Place {
     Object.assign(this, attrs);
   }
 
+  async save() {
+    return mongo.db.collection("places").insertOne(this);
+  }
+
   static exec() {
     return mongo.db.collection("places");
   }

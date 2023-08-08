@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moove-places-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: moove-places
+  template:
+    metadata:
+      labels:
+        app: moove-places
+    spec:
+      containers:
+        - name: moove-places-cont
+          image: faridmansimli/moove-places
+          ports:
+            - containerPort: 3003
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "128Mi"
+
+          env:
+            - name: APP_NAME
+              value: moove-places
+
+            - name: NODE_ENV
+              value: development
+
+            - name: APP_HOST
+              value: moove-places-srv
+
+            - name: MONGO_HOST
+              value: micro-places-db-srv
+
+            - name: MONGO_PORT
+              value: "27017"
+
+            - name: MONGO_DB
+              value: placesdb
+
+            - name: MONGO_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-user
+                  value: MONGO_USER
+
+            - name: MONGO_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-user
+                  value: MONGO_PASSWORD
+
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  value: JWT_SECRET
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: moove-places-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: moove-places
+  ports:
+    - name: moove-places-port
+      protocol: TCP
+      port: 3003
+      targetPort: 3003

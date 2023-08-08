@@ -1,7 +1,7 @@
 import { CustomError, IError } from "./custom-error";
 
 export class ForbiddenError extends CustomError {
-  public httpCode: 403;
+  public httpCode = 403;
 
   constructor(public message: string) {
     super(message);

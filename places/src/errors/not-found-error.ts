@@ -5,9 +5,10 @@ export class NotFoundError extends CustomError {
 
   constructor(public message: string) {
     super(message);
+    Object.setPrototypeOf(this, NotFoundError.prototype);
   }
 
-  serialize() {
+  serialize(): IError {
     return {
       message: this.message,
       httpCode: this.httpCode

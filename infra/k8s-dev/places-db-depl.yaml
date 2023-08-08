@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moove-places-db-depl
+spec:
+  selector:
+    matchLabels:
+      app: moove-places-db
+  template:
+    metadata:
+      labels:
+        app: moove-places-db
+    spec:
+      volumes:
+        - name: moove-places-db-storage
+          persistenceVolumeClaim:
+            claimName: moove-places-db-pvc
+      containers:
+        - name: moove-places-db-cont
+          image: mongo
+          ports:
+            - containerPort: 27017
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "128Mi"
+          volumeMounts:
+            - name: micro-places-db-storage
+              mountPath: /data/db
+          env:
+            - name: MONGO_INITDB_ROOT_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-user
+                  value: MONGO_USER
+
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-password
+                  value: MONGO_PASSWORD
+
+            - name: MONGO_INITDB_DATABASE
+              value: placesdb
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: moove-places-db-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: moove-places-db
+  ports:
+    - name: moove-places-db-port
+      protocol: TCP
+      port: 27017
+      targetPort: 27017
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: moove-places-db-pvc
+spec:
+  resources:
+    requests:
+      storage: "500Mi"
+    accessModes:
+      - ReadWriteOnce

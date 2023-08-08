@@ -8,7 +8,7 @@
     "data": [
         {
             "name": "baseURL",
-            "value": "http://moove.dev/api"
+            "value": "http://localhost:3003/api"
         },
         {
             "name": "accessToken",
@@ -17,6 +17,10 @@
         {
             "name": "refreshToken",
             "value": ""
+        },
+        {
+            "name": "baseURL2",
+            "value": "http://localhost:3003/api"
         }
     ]
 }

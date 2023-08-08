@@ -1,4 +1,5 @@
 import type { RequestHandler, ErrorRequestHandler } from "express";
+import { CustomError } from "../errors/custom-error";
 
 export const catch404: RequestHandler = (req, res, _next) => {
   try {
@@ -10,8 +11,13 @@ export const catch404: RequestHandler = (req, res, _next) => {
 
 export const catchError: ErrorRequestHandler = (err, req, res, _next) => {
   try {
+    if (err instanceof CustomError) {
+      console.log(err.httpCode);
+
+      return res.status(err.httpCode).json(err.serialize());
+    }
     res.status(500).json({ httpCode: 500, message: err.message });
-  } catch (error) {
-    res.status(500).json({ httpCode: 500, message: error.message });
+  } catch (_error) {
+    res.status(500).json({ httpCode: 500, message: "unknown error." });
   }
 };
