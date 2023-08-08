@@ -1,4 +1,6 @@
 {
+  "name": "nodejs-moove",
+  "version": "1.0.0",
   "scripts": {
     "git:commit": "git add . && git commit -m \"$npm_package_name ($npm_package_version) ($(date))\"",
     "git:push": "git push origin master",
