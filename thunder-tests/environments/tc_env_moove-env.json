@@ -1,0 +1,22 @@
+{
+    "_id": "2aa2700c-a22e-428b-a171-ed0b7fa07cdd",
+    "name": "moove-env",
+    "default": true,
+    "sortNum": 10000,
+    "created": "2023-08-08T08:35:00.220Z",
+    "modified": "2023-08-08T08:35:00.220Z",
+    "data": [
+        {
+            "name": "baseURL",
+            "value": "http://moove.dev/api"
+        },
+        {
+            "name": "accessToken",
+            "value": ""
+        },
+        {
+            "name": "refreshToken",
+            "value": ""
+        }
+    ]
+}
