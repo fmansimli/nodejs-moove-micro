@@ -28,7 +28,7 @@ if (!JWT_SECRET) {
 async function bootstrap() {
   try {
     await mongo.connect(MONGO_URL);
-    await kafka.connect();
+    await kafka.connect(KAFKA_URL);
 
     const admin = kafka.client.admin();
 
