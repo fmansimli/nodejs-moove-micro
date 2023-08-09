@@ -10,6 +10,7 @@ declare global {
       MONGO_USER: string;
       MONGO_PASSWORD: string;
       MONGO_URL: string;
+      KAFKA_URL: string;
       JWT_SECRET: string;
     }
   }
