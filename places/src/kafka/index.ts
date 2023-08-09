@@ -8,7 +8,7 @@ class AppKafka {
     this.instance = instance;
   }
 
-  get client() {
+  get client(): Kafka {
     if (!this.instance) {
       throw new Error("Kafka has not been initialized");
     }

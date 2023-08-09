@@ -30,6 +30,11 @@ async function bootstrap() {
     await mongo.connect(MONGO_URL);
     await kafka.connect();
 
+    const admin = kafka.client.admin();
+
+    const topics = await admin.listTopics();
+    console.log(topics);
+
     httpServer.listen(PORT, () => {
       Logger.log(`Listening on ${PORT}, (${process.env.APP_NAME})`);
     });
