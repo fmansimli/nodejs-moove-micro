@@ -10,6 +10,13 @@
             "containerId": "",
             "created": "2023-08-08T08:37:11.802Z",
             "sortNum": 10000
+        },
+        {
+            "_id": "a1b2d8ba-7249-48f9-9d0f-beffff99cddd",
+            "name": "account",
+            "containerId": "",
+            "created": "2023-08-10T13:41:00.773Z",
+            "sortNum": 20000
         }
     ],
     "requests": [
@@ -103,6 +110,34 @@
             "sortNum": 50000,
             "created": "2023-08-08T14:25:41.023Z",
             "modified": "2023-08-08T14:25:53.609Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "313b3854-f106-43cc-b794-3e538c56ed95",
+            "colId": "b24e8951-2a94-47c0-91d8-e0f01711b164",
+            "containerId": "a1b2d8ba-7249-48f9-9d0f-beffff99cddd",
+            "name": "get profile",
+            "url": "{{baseURL}}/account/profile",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2023-08-10T13:41:08.252Z",
+            "modified": "2023-08-10T13:41:26.231Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "8c28cece-f0cf-44de-a7e2-4e01da21c87d",
+            "colId": "b24e8951-2a94-47c0-91d8-e0f01711b164",
+            "containerId": "a1b2d8ba-7249-48f9-9d0f-beffff99cddd",
+            "name": "delete profile",
+            "url": "{{baseURL}}/account/profile",
+            "method": "DELETE",
+            "sortNum": 70000,
+            "created": "2023-08-10T13:41:34.916Z",
+            "modified": "2023-08-10T13:41:40.174Z",
             "headers": [],
             "params": [],
             "tests": []

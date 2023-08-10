@@ -2,18 +2,17 @@
   "compilerOptions": {
     "module": "CommonJS",
     "target": "ES2017",
-    "baseUrl": "./",
+    "baseUrl": ".",
     "outDir": "./dist",
+    "allowJs": true,
     "paths": {
       "@/src/*": ["src/*"]
     },
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "strictPropertyInitialization": false,
     "forceConsistentCasingInFileNames": true,
-    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "noImplicitAny": false
-  },
-  "exclude": ["node_modules"]
+    "emitDecoratorMetadata": true,
+    "strict": true
+  }
 }
