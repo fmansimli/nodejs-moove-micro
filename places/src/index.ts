@@ -33,7 +33,7 @@ async function bootstrap() {
     const admin = kafka.client.admin();
 
     const topics = await admin.listTopics();
-    console.log(topics);
+    console.log("TOPICS::", topics);
 
     httpServer.listen(PORT, () => {
       Logger.log(`Listening on ${PORT}, (${process.env.APP_NAME})`);
