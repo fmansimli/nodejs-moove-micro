@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moove-account-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: moove-account
+  template:
+    metadata:
+      labels:
+        app: moove-account
+    spec:
+      containers:
+        - name: moove-account-cont
+          image: faridmansimli/moove-account
+          resources:
+            limits: cpu:"500m"
+              memory:"128Mi"
+          ports:
+            - containerPort: 3002
+          env:
+            - name: NODE_ENV
+              value: development
+
+            - name: APP_NAME
+              value: moove-account
+
+            - name: APP_HOST
+              value: moove-account-srv
+
+            - name: PORT
+              value: "3002"
+
+            - name: POSTGRES_HOST
+              value: moove-account-db-srv
+
+            - name: POSTGRES_PORT
+              value: "5432"
+
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-user
+                  value: POSTGRES_USER
+
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-password
+                  value: POSTGRES_PASSWORD
+
+            - name: POSTGRES_DB
+              value: accountdb
+
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  value: JWT_SECRET
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: moove-account-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: moove-account
+  ports:
+    - name: moove-account-port
+      protocol: TCP
+      port: 3002
+      targetPort: 3002
