@@ -13,7 +13,7 @@
     "push:docker": "docker push faridmansimli/$npm_package_name"
   },
   "keywords": [
-    "nodej",
+    "nodejs",
     "typescript"
   ],
   "author": "Farid Mansimli",

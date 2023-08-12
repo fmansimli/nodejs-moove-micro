@@ -1,0 +1,26 @@
+apiVersion: skaffold/v4beta5
+kind: Config
+manifests:
+  rawYaml:
+    - ./infra/k8s-dev/*
+build:
+  local:
+    push: false
+  artifacts:
+    - image: faridmansimli/moove-places
+      context: places
+      sync:
+        manual:
+          - src: src/**/*.ts
+            dest: .
+      docker:
+        dockerfile: Dockerfile.dev
+
+    - image: faridmansimli/moove-account
+      context: account
+      sync:
+        manual:
+          - src: src/**/*.ts
+            dest: .
+      docker:
+        dockerfile: Dockerfile.dev

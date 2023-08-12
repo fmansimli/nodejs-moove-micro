@@ -3,7 +3,7 @@ import app from "./app";
 
 import { MikroORM } from "@mikro-orm/core";
 
-import { AppDi, DI } from "./ioc/di";
+import { AppDi } from "./ioc/di";
 import { Logger } from "./utils/logger";
 import { AppConfig } from "./config";
 import { kafka } from "./kafka";
