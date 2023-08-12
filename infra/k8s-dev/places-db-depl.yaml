@@ -11,10 +11,10 @@ spec:
       labels:
         app: moove-places-db
     spec:
-      volumes:
-        - name: moove-places-db-storage
-          persistenceVolumeClaim:
-            claimName: moove-places-db-pvc
+      # volumes:
+      #   - name: moove-places-db-pvc
+      #     persistenceVolumeClaim:
+      #       claimName: moove-places-db-pvc
       containers:
         - name: moove-places-db-cont
           image: mongo
@@ -24,21 +24,21 @@ spec:
             limits:
               cpu: "500m"
               memory: "128Mi"
-          volumeMounts:
-            - name: micro-places-db-storage
-              mountPath: /data/db
+          # volumeMounts:
+          #   - name: moove-places-db-pvc
+          #     mountPath: /data/db
           env:
-            - name: MONGO_INITDB_ROOT_USER
-              valueFrom:
-                secretKeyRef:
-                  name: mongo-user
-                  value: MONGO_USER
+            # - name: MONGO_INITDB_ROOT_USERNAME
+            #   valueFrom:
+            #     secretKeyRef:
+            #       name: mongo-user
+            #       key: MONGO_USER
 
-            - name: MONGO_INITDB_ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mongo-password
-                  value: MONGO_PASSWORD
+            # - name: MONGO_INITDB_ROOT_PASSWORD
+            #   valueFrom:
+            #     secretKeyRef:
+            #       name: mongo-password
+            #       key: MONGO_PASSWORD
 
             - name: MONGO_INITDB_DATABASE
               value: placesdb
@@ -66,6 +66,7 @@ metadata:
 spec:
   resources:
     requests:
-      storage: "500Mi"
-    accessModes:
-      - ReadWriteOnce
+      storage: "5000Mi"
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce

@@ -5,8 +5,8 @@ declare global {
       APP_NAME: string;
       APP_HOST: string;
       MONGO_HOST: string;
-      MONGODB_PORT: string;
-      MONGO_DB: string;
+      MONGO_PORT: string;
+      MONGO_DATABASE: string;
       MONGO_USER: string;
       MONGO_PASSWORD: string;
       MONGO_URL: string;

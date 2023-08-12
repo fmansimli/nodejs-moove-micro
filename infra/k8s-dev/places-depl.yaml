@@ -45,25 +45,25 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: mongo-user
-                  value: MONGO_USER
+                  key: MONGO_USER
 
             - name: MONGO_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: mongo-user
-                  value: MONGO_PASSWORD
+                  name: mongo-password
+                  key: MONGO_PASSWORD
 
             - name: MONGO_DATABASE
               value: placesdb
 
             - name: KAFKA_URL
-              value: moove-kafka-srv:9092
+              value: kafka-service:9092
 
             - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:
                   name: jwt-secret
-                  value: JWT_SECRET
+                  key: JWT_SECRET
 
 ---
 apiVersion: v1

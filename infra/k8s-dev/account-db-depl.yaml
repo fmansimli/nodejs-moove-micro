@@ -24,15 +24,15 @@ spec:
           env:
             - name: POSTGRES_USER
               valueFrom:
-                secretKeytRef:
+                secretKeyRef:
                   name: postgres-user
-                  value: postgres-password
+                  key: POSTGRES_USER
 
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: postgres-password
-                  value: POSTGRES_PASSWORD
+                  key: POSTGRES_PASSWORD
 
             - name: POSTGRES_DB
               value: accountdb
@@ -64,5 +64,6 @@ spec:
   resources:
     requests:
       storage: "5000Mi"
-    accessModes:
-      - ReadWriteOnce
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce

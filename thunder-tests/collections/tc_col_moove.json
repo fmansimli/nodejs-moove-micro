@@ -141,6 +141,20 @@
             "headers": [],
             "params": [],
             "tests": []
+        },
+        {
+            "_id": "4fdebbe9-c484-431d-9001-4a6aedd74412",
+            "colId": "b24e8951-2a94-47c0-91d8-e0f01711b164",
+            "containerId": "a1b2d8ba-7249-48f9-9d0f-beffff99cddd",
+            "name": "get all users",
+            "url": "{{baseURL}}/account/users",
+            "method": "GET",
+            "sortNum": 80000,
+            "created": "2023-08-12T19:37:21.505Z",
+            "modified": "2023-08-12T19:37:33.083Z",
+            "headers": [],
+            "params": [],
+            "tests": []
         }
     ],
     "settings": {

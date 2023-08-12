@@ -44,25 +44,25 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: postgres-user
-                  value: POSTGRES_USER
+                  key: POSTGRES_USER
 
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: postgres-password
-                  value: POSTGRES_PASSWORD
+                  key: POSTGRES_PASSWORD
 
             - name: POSTGRES_DB
               value: accountdb
 
             - name: KAFKA_URL
-              value: moove-kafka-srv:9092
+              value: kafka-service:9092
 
             - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:
                   name: jwt-secret
-                  value: JWT_SECRET
+                  key: JWT_SECRET
 
 ---
 apiVersion: v1

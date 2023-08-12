@@ -43,7 +43,7 @@ if (!JWT_SECRET) {
 
 async function bootstrap() {
   try {
-    //await kafka.connect(KAFKA_URL);
+    await kafka.connect(KAFKA_URL);
     const orm = await MikroORM.init();
     AppDi.init(orm);
 

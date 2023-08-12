@@ -2,86 +2,76 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: movve-zookeeper-srv
+  name: kafka-service
   labels:
-    app: moove-zookeeper
-spec:
-  ports:
-    - port: 2181
-  selector:
-    app: moove-zookeeper
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: moove-zookeeper-depl
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: moove-zookeeper
-  template:
-    metadata:
-      labels:
-        app: moove-zookeeper
-    spec:
-      containers:
-        - name: moove-zookeeper-cont
-          image: ubuntu/zookeeper:edge
-          ports:
-            - containerPort: 2181
-              name: moove-zookeeper-port
-              protocol: TCP
-          resources:
-            limits:
-              cpu: "500m"
-              memory: "128Mi"
-
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: moove-kafka-depl
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: moove-kafka
-  template:
-    metadata:
-      labels:
-        app: moove-kafka
-    spec:
-      containers:
-        - name: moove-kafka-cont
-          image: ubuntu/kafka:edge
-          env:
-            - name: ZOOKEEPER_HOST
-              value: moove-zookeeper-srv
-          args:
-            [
-              "/etc/kafka/server.properties",
-              "--override",
-              "advertised.listeners=PLAINTEXT://moove-kafka-srv:9092"
-            ]
-          ports:
-            - containerPort: 9092
-              name: moove-kafka-port
-              protocol: TCP
-          resources:
-            limits:
-              cpu: "500m"
-              memory: "128Mi"
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: moove-kafka-srv
-  labels:
-    app: moove-kafka
+    app: kafka
 spec:
   ports:
     - port: 9092
   selector:
-    app: moove-kafka
+    app: kafka
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafka
+  template:
+    metadata:
+      labels:
+        app: kafka
+    spec:
+      containers:
+        - name: kafka
+          image: ubuntu/kafka:edge
+          env:
+            - name: ZOOKEEPER_HOST
+              value: zookeeper-service
+          args:
+            [
+              "/etc/kafka/server.properties",
+              "--override",
+              "advertised.listeners=PLAINTEXT://kafka-service:9092"
+            ]
+          ports:
+            - containerPort: 9092
+              name: kafka
+              protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zookeeper-service
+  labels:
+    app: zookeeper
+spec:
+  ports:
+    - port: 2181
+  selector:
+    app: zookeeper
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zookeeper-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zookeeper
+  template:
+    metadata:
+      labels:
+        app: zookeeper
+    spec:
+      containers:
+        - name: zookeeper
+          image: ubuntu/zookeeper:edge
+          ports:
+            - containerPort: 2181
+              name: zookeeper
+              protocol: TCP
