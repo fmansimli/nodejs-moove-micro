@@ -56,6 +56,9 @@ spec:
             - name: MONGO_DATABASE
               value: placesdb
 
+            - name: KAFKA_URL
+              value: moove-kafka-srv:9092
+
             - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:

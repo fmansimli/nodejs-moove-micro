@@ -16,8 +16,9 @@ spec:
         - name: moove-account-cont
           image: faridmansimli/moove-account
           resources:
-            limits: cpu:"500m"
-              memory:"128Mi"
+            limits:
+              cpu: "500m"
+              memory: "128Mi"
           ports:
             - containerPort: 3002
           env:
@@ -53,6 +54,9 @@ spec:
 
             - name: POSTGRES_DB
               value: accountdb
+
+            - name: KAFKA_URL
+              value: moove-kafka-srv:9092
 
             - name: JWT_SECRET
               valueFrom:

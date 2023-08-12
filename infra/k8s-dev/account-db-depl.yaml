@@ -47,7 +47,8 @@ metadata:
   name: moove-account-db-srv
 spec:
   type: ClusterIP
-  selector: moove-account-db
+  selector:
+    app: moove-account-db
   ports:
     - name: moove-account-db-port
       protocol: TCP

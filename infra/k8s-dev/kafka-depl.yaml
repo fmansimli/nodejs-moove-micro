@@ -32,19 +32,11 @@ spec:
             - containerPort: 2181
               name: moove-zookeeper-port
               protocol: TCP
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "128Mi"
 
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: moove-kafka-srv
-  labels:
-    app: moove-kafka
-spec:
-  ports:
-    - port: 9092
-  selector:
-    app: moove-kafka
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -76,3 +68,20 @@ spec:
             - containerPort: 9092
               name: moove-kafka-port
               protocol: TCP
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "128Mi"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: moove-kafka-srv
+  labels:
+    app: moove-kafka
+spec:
+  ports:
+    - port: 9092
+  selector:
+    app: moove-kafka

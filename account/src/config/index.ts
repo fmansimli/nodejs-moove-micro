@@ -1,5 +1,7 @@
 import "dotenv/config";
 
 export class AppConfig {
-  static init() {}
+  static init() {
+    return;
+  }
 }
