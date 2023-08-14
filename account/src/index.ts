@@ -2,11 +2,12 @@ import http from "http";
 import app from "./app";
 
 import { MikroORM } from "@mikro-orm/core";
-
 import { AppDi } from "./ioc/di";
 import { Logger } from "./utils/logger";
 import { AppConfig } from "./config";
 import { kafka } from "./kafka";
+
+import { PlaceCreatedListener } from "./kafka/listeners/place-created.listener";
 
 AppConfig.init();
 
@@ -52,6 +53,10 @@ async function bootstrap() {
 
     httpServer.listen(PORT, () => {
       Logger.log(`Listening on port ${PORT} , (${process.env.APP_NAME})`);
+
+      new PlaceCreatedListener(kafka.client).listen((message, data) => {
+        console.log("LISTENED::", data);
+      });
     });
   } catch (error) {
     Logger.error(error);
