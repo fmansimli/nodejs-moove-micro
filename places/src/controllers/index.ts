@@ -1,9 +1,11 @@
 import { RequestHandler } from "express";
 import { ObjectId } from "mongodb";
 
+import { kafka } from "../kafka";
 import { Meta } from "../utils/meta";
 import { Place } from "../models/place";
 import { NotFoundError } from "../errors";
+import { PlaceCreatedProducer } from "../kafka/producer/place-created.producer";
 
 export const create: RequestHandler = async (req, res, next) => {
   const { name, description, location } = req.body as Place;
@@ -18,6 +20,11 @@ export const create: RequestHandler = async (req, res, next) => {
     });
 
     await place.save();
+
+    new PlaceCreatedProducer(kafka.client).publish({
+      _id: place._id.toString(),
+      name: place.name
+    });
 
     res.status(200).json({
       body: place,
