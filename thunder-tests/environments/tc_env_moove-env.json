@@ -8,7 +8,7 @@
     "data": [
         {
             "name": "baseURL",
-            "value": "http://myapp.dev/api"
+            "value": "http://myapp.dev"
         },
         {
             "name": "accessToken",

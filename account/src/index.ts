@@ -44,19 +44,16 @@ if (!JWT_SECRET) {
 
 async function bootstrap() {
   try {
-    await kafka.connect(KAFKA_URL);
     const orm = await MikroORM.init();
     AppDi.init(orm);
 
     const migrator = orm.getMigrator();
     await migrator.up();
 
+    kafka.connect(KAFKA_URL);
+
     httpServer.listen(PORT, () => {
       Logger.log(`Listening on port ${PORT} , (${process.env.APP_NAME})`);
-
-      new PlaceCreatedListener(kafka.client).listen((message, data) => {
-        console.log("LISTENED::", data);
-      });
     });
   } catch (error) {
     Logger.error(error);

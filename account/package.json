@@ -7,7 +7,7 @@
     "build": "tsc",
     "start": "node dist/src/index.js",
     "start:pm2": "pm2-runtime start ./dist/src/index.js",
-    "dev": "ts-node-dev --respawn --transpile-only --poll src/index.ts",
+    "dev": "ts-node-dev --respawn --transpile-only --poll ./src/index.ts",
     "start:docker": "docker run -p 4001:4001 faridmansimli/$npm_package_name",
     "build:docker": "docker build -t faridmansimli/$npm_package_name .",
     "push:docker": "docker push faridmansimli/$npm_package_name"

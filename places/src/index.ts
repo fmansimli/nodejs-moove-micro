@@ -45,7 +45,7 @@ if (!JWT_SECRET) {
 async function bootstrap() {
   try {
     await mongo.connect(`mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_DB}`);
-    await kafka.connect(KAFKA_URL);
+    kafka.connect(KAFKA_URL);
 
     httpServer.listen(PORT, () => {
       Logger.log(`Listening on ${PORT}, (${process.env.APP_NAME})`);

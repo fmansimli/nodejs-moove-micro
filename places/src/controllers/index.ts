@@ -19,10 +19,10 @@ export const create: RequestHandler = async (req, res, next) => {
       updatedAt: new Date()
     });
 
-    await place.save();
+    //await place.save();
 
     new PlaceCreatedProducer(kafka.client).publish({
-      _id: place._id.toString(),
+      _id: "ssss",
       name: place.name
     });
 

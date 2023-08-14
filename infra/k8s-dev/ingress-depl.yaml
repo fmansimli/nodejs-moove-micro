@@ -9,7 +9,7 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   rules:
-    - host: myap.dev
+    - host: myapp.dev
       http:
         paths:
           - path: /api/account/?(.*)
