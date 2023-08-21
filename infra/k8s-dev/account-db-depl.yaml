@@ -12,15 +12,25 @@ spec:
       labels:
         app: moove-account-db
     spec:
+      volumes:
+        - name: moove-account-db-pvc
+          persistentVolumeClaim:
+            claimName: moove-account-db-pvc
       containers:
         - name: moove-account-db-cont
           image: postgres
           resources:
             limits:
+              cpu: "1500m"
+              memory: "500Mi"
+            requests:
               cpu: "500m"
               memory: "128Mi"
           ports:
             - containerPort: 5432
+          volumeMounts:
+            - name: moove-account-db-pvc
+              mountPath: /var/lib/postgresql/data
           env:
             - name: POSTGRES_USER
               valueFrom:

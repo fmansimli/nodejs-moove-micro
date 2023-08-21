@@ -50,7 +50,7 @@ async function bootstrap() {
     const migrator = orm.getMigrator();
     await migrator.up();
 
-    kafka.connect(KAFKA_URL);
+    await kafka.connect(KAFKA_URL);
 
     httpServer.listen(PORT, () => {
       Logger.log(`Listening on port ${PORT} , (${process.env.APP_NAME})`);

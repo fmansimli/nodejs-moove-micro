@@ -28,6 +28,13 @@ spec:
       containers:
         - name: kafka
           image: ubuntu/kafka:edge
+          resources:
+            limits:
+              cpu: "1500m"
+              memory: "500Mi"
+            requests:
+              cpu: "500m"
+              memory: "128Mi"
           env:
             - name: ZOOKEEPER_HOST
               value: zookeeper-service
@@ -71,6 +78,13 @@ spec:
       containers:
         - name: zookeeper
           image: ubuntu/zookeeper:edge
+          resources:
+            limits:
+              cpu: "1500m"
+              memory: "500Mi"
+            requests:
+              cpu: "500m"
+              memory: "128Mi"
           ports:
             - containerPort: 2181
               name: zookeeper
