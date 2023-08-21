@@ -4,7 +4,7 @@ import { PlaceCreatedEvent } from "../events/place-created.event";
 import { PlaceUpdatedEvent } from "../events/place-updated.event";
 
 export function placeCreated(payload: EachMessagePayload, data: PlaceCreatedEvent["data"]) {
-  console.log("placeCreated:::", data.name);
+  console.log("placeCreated:::", JSON.stringify(data));
 }
 
 export function placeUpdated(payload: EachMessagePayload, data: PlaceUpdatedEvent["data"]) {

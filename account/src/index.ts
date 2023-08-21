@@ -8,6 +8,7 @@ import { AppConfig } from "./config";
 import { kafka } from "./kafka";
 
 import { PlaceCreatedListener } from "./kafka/listeners/place-created.listener";
+import * as placeHandlers from "./kafka/handlers/places.handler";
 
 AppConfig.init();
 
@@ -54,6 +55,8 @@ async function bootstrap() {
 
     httpServer.listen(PORT, () => {
       Logger.log(`Listening on port ${PORT} , (${process.env.APP_NAME})`);
+
+      new PlaceCreatedListener(kafka.client).listen(placeHandlers.placeCreated);
     });
   } catch (error) {
     Logger.error(error);

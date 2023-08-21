@@ -1,8 +1,7 @@
 import type { Kafka } from "kafkajs";
-import { Topics } from "../events/topics";
 
 interface Event {
-  topic: Topics.PlaceCreated;
+  topic: string;
   data: any;
 }
 
@@ -19,12 +18,11 @@ export abstract class KafkaBaseProducer<T extends Event> {
     await producer.connect();
 
     await producer.send({
-      topic: this.topic,
+      topic: this.topic.toString(),
       messages: [
         {
-          value: data,
-          partition: 0,
-          timestamp: new Date().toDateString()
+          value: JSON.stringify(data),
+          partition: 0
         }
       ]
     });

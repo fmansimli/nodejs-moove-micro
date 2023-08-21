@@ -23,6 +23,14 @@ class AppKafka {
 
     const admin = this.instance.admin();
     await admin.connect();
+
+    await admin.createTopics({
+      topics: [
+        { numPartitions: 1, topic: "place-created" },
+        { numPartitions: 1, topic: "place-updated" }
+      ]
+    });
+
     await admin.disconnect();
     return;
   }
