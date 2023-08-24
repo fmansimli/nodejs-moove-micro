@@ -7,6 +7,15 @@ build:
   local:
     push: false
   artifacts:
+    - image: faridmansimli/moove-auth
+      context: auth
+      sync:
+        manual:
+          - src: src/**/*.ts
+            dest: .
+      docker:
+        dockerfile: Dockerfile.dev
+
     - image: faridmansimli/moove-places
       context: places
       sync:
