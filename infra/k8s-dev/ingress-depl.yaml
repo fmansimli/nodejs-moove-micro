@@ -12,6 +12,14 @@ spec:
     - host: myapp.dev
       http:
         paths:
+          - path: /api/auth/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: moove-auth-srv
+                port:
+                  number: 3001
+
           - path: /api/account/?(.*)
             pathType: Prefix
             backend:

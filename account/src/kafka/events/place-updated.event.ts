@@ -1,7 +1,7 @@
 import { Topics } from "./topics";
 
 export interface PlaceUpdatedEvent {
-  topic: Topics.PlaceCreated;
+  topic: Topics.PlaceUpdated;
   data: {
     _id: string;
     name: string;
