@@ -24,9 +24,6 @@ spec:
             limits:
               cpu: "1500m"
               memory: "500Mi"
-            requests:
-              cpu: "500m"
-              memory: "128Mi"
           volumeMounts:
             - name: moove-places-db-pvc
               mountPath: /data/db
@@ -67,9 +64,10 @@ kind: PersistentVolumeClaim
 metadata:
   name: moove-places-db-pvc
 spec:
+  storageClassName: hostpath
   resources:
     requests:
-      storage: "5000Mi"
+      storage: "500Mi"
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce

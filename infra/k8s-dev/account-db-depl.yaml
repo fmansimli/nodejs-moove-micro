@@ -23,9 +23,6 @@ spec:
             limits:
               cpu: "1500m"
               memory: "500Mi"
-            requests:
-              cpu: "500m"
-              memory: "128Mi"
           ports:
             - containerPort: 5432
           volumeMounts:
@@ -71,9 +68,10 @@ kind: PersistentVolumeClaim
 metadata:
   name: moove-account-db-pvc
 spec:
+  storageClassName: hostpath
   resources:
     requests:
-      storage: "5000Mi"
+      storage: "500Mi"
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
