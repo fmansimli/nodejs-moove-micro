@@ -1,8 +1,8 @@
-import { MikroORM } from "@mikro-orm/core";
 import { PostgreSqlDriver } from "@mikro-orm/postgresql";
 import { TSMigrationGenerator } from "@mikro-orm/migrations";
+import type { Options } from "@mikro-orm/core";
 
-const config: Parameters<typeof MikroORM.init>[0] = {
+const config: Options = {
   type: "postgresql",
   entities: ["./dist/src/models/*.js"],
   entitiesTs: ["./src/models/*.ts"],
